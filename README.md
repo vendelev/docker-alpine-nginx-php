@@ -3,6 +3,7 @@ Docker image based on Alpine Linux 3.7 with Nginx, PHP, PHP extension Pinba, Com
 
 Run the image:
 `docker run -d --name php -p 80:80 vendelev/php:7.1` 
+Then you can type http://localhost or http://host-ip in your browser and see phpinfo.
 
 Document root for your project: /var/www/web
 
@@ -37,7 +38,6 @@ Image contains the following extensions:
 - session
 - imagick
 - opcache
-- zip
 - dev
 - openssl
 - redis

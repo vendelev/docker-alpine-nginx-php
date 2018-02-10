@@ -41,7 +41,6 @@ RUN apk add --no-cache \
             php7-session \
             php7-imagick \
             php7-opcache \
-            php7-zip \
             php7-dev \
             php7-openssl \
             php7-redis \
@@ -57,6 +56,9 @@ RUN apk add --no-cache \
     && sed -i 's/127.0.0.1:9000/9000/g' /etc/php/php-fpm.d/www.conf \
     && sed -i 's/user = nobody/user = nginx/g' /etc/php/php-fpm.d/www.conf \
     && sed -i 's/group = nobody/group = nginx/g' /etc/php/php-fpm.d/www.conf \
+    && echo "date.timezone = ${TIMEZONE}" >> /etc/php7/php.ini \
+    && sed -i 's/post_max_size = .*/post_max_size = 200M/g' /etc/php7/php.ini \
+    && sed -i 's/upload_max_filesize = .*/upload_max_filesize = 50M/g' /etc/php7/php.ini \
 # Install pinba
     && git clone https://github.com/tony2001/pinba_extension /tmp/pinba_extension \
     && cd /tmp/pinba_extension \
@@ -83,7 +85,9 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
 RUN composer global require --prefer-dist --optimize-autoloader hirak/prestissimo
 
 RUN mkdir /run/nginx \
-    mkdir /var/www/logs
+    && mkdir /var/www/logs \
+    && mkdir -p /var/www/web/web \
+    && echo "<?php phpinfo(); ?>" > /var/www/web/web/index.php
 
 ARG GIT_USER_EMAIL=docker@php
 ARG GIT_USER_NAME=Docker-PHP
