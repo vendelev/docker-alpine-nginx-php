@@ -57,6 +57,7 @@ RUN apk add --no-cache \
     && sed -i 's/user = nobody/user = nginx/g' /etc/php/php-fpm.d/www.conf \
     && sed -i 's/group = nobody/group = nginx/g' /etc/php/php-fpm.d/www.conf \
     && echo "date.timezone = ${TIMEZONE}" >> /etc/php7/php.ini \
+    && sed -i 's/expose_php = .*/expose_php = Off/g' /etc/php7/php.ini \
     && sed -i 's/post_max_size = .*/post_max_size = 200M/g' /etc/php7/php.ini \
     && sed -i 's/upload_max_filesize = .*/upload_max_filesize = 50M/g' /etc/php7/php.ini \
 # Install pinba
