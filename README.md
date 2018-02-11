@@ -49,7 +49,12 @@ Image contains the following extensions:
 - xmlwriter
 - pinba
 
-The extensions Pinba and Xdebug are disabled (see pinba.ini, xdebug.ini), you can enable them in your child images. Expample: `RUN sed -i 's/pinba.enabled=0/pinba.enabled=1/g' /etc/php7/conf.d/20-pinba.ini`
+The extensions Pinba and Xdebug are disabled (see pinba.ini, xdebug.ini), you can enable them in your child images.
+Expample:
+`
+RUN sed -i 's/pinba.enabled=0/pinba.enabled=1/g' /etc/php7/conf.d/20-pinba.ini \
+    && sed -i 's/pinba.server=pinba:30002/pinba.server=your_pinba_host:30002/g' /etc/php7/conf.d/20-pinba.ini
+`
 
 By default, the image exposes the the following ports:
 - 80 Nginx
