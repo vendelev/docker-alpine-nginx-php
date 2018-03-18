@@ -28,6 +28,7 @@ RUN apk add --no-cache \
             php7-xdebug \
             php7-zip \
             php7-xml \
+            php7-simplexml \
             php7-bcmath \
             php7-curl \
             php7-phar \
